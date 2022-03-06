@@ -1,0 +1,18 @@
+{
+  "name": "herokuapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "isuruuy",
+  "license": "ISC",
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.1.0",
+    "cypress": "^9.5.1"
+  },
+  "dependencies": {
+    "cypress-downloadfile": "^1.2.1"
+  }
+}
