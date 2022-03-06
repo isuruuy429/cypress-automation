@@ -8,7 +8,7 @@ This Cypress Project contains the tests for the following elements.
 
 ## Steps to run the tests in headless mode
 
-1. Clone the repository
+1. Clone the repository at https://github.com/isuruuy429/cypress-automation.git
 2. Run the follwing command.
    `npx cypress run`
 
