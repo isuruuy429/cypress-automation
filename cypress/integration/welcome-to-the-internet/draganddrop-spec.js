@@ -13,13 +13,19 @@ require('@4tw/cypress-drag-drop')
 
 describe('draganddrop tests', ()=> {
 
+    let values;
+
     before(()=> {
+        cy.fixture('expected').then(function (data) {
+            values = data;
+        })
+
         cy.visitHerakuPage()
     })
 
     it('should verify if url contains string, drag_and_drop', ()=>{
         cy.contains('Drag and Drop').click()
-        cy.url().should('include', '/drag_and_drop')
+        cy.url().should('include', values.drag_and_drop)
     })
 
     it('should verify if A can be dragged and dropped to B', ()=>{

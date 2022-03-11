@@ -16,9 +16,13 @@ module.exports = (on, config) => {
 
 describe('File download tests', () =>{
 
+    let expectedText = 'a text file'
+    let downloadURL = 'https://the-internet.herokuapp.com/download/some-file.txt'
+    let location = 'cypress/fixtures/Download'
+    let filename = 'downloaded.txt'
+
     it('should verify if file is downloaded to cypress.fixtures folder', () => {
-        cy.downloadFile('https://the-internet.herokuapp.com/download/some-file.txt',
-            'cypress/fixtures/Download', 'some-file.txt')
-        cy.readFile('cypress/fixtures/Download/some-file.txt').should('contain', 'ansicpg1252')    
+        cy.downloadFile(downloadURL,location, filename)
+        cy.readFile(`${location}/${filename}`).should('contain', expectedText)    
     })
 })

@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
         "types": ["cypress", "@4tw/cypress-drag-drop"]
-        }
+        },
+    "baseUrl":"https://the-internet.herokuapp.com"
 }
