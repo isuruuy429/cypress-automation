@@ -16,10 +16,10 @@ module.exports = (on, config) => {
 
 describe('File download tests', () =>{
 
-    let expectedText = 'a text file'
-    let downloadURL = 'https://the-internet.herokuapp.com/download/some-file.txt'
-    let location = 'cypress/fixtures/Download'
-    let filename = 'downloaded.txt'
+    const expectedText = 'a text file'
+    const downloadURL = 'https://the-internet.herokuapp.com/download/some-file.txt'
+    const location = 'cypress/fixtures/Download'
+    const filename = 'downloaded.txt'
 
     it('should verify if file is downloaded to cypress.fixtures folder', () => {
         cy.downloadFile(downloadURL,location, filename)
