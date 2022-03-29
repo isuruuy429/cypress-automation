@@ -16,7 +16,7 @@ module.exports = (on, config) => {
 
 describe('File download tests', () =>{
 
-    const expectedText = 'a text file'
+    const expectedText = 'pardirnatural'
     const downloadURL = 'https://the-internet.herokuapp.com/download/some-file.txt'
     const location = 'cypress/fixtures/Download'
     const filename = 'downloaded.txt'
