@@ -2,13 +2,15 @@
 This class has tests to verify the Dropdown page. 
 */
 
-import Dropdown from '../../page-objects/dropdown'
+import Elements from '../../page-objects/elements'
 
 describe('dropdown tests', ()=> {
 
-    const dropdown = new Dropdown()
+    const elements = new Elements()
     let values;
 
+    const h3 = 'h3'
+    const dropdownVal = 'select#dropdown'
 
     before(()=> {
         cy.fixture('expected').then( (data) => {
@@ -24,7 +26,7 @@ describe('dropdown tests', ()=> {
     })
 
     it('should verify if it can select items from the dropdown list', ()=>{
-       dropdown.dropdown().select('Option 1').should('have.value', '1')
+        elements.get_element(dropdownVal).select('Option 1').should('have.value', '1')
    })
 
 after(()=>{

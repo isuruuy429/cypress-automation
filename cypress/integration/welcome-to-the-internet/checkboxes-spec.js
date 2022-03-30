@@ -2,12 +2,15 @@
 This class has tests to verify the Checkboxes page.  
 */
 
-import Checkboxes from '../../page-objects/checkboxes'
+import Elements from '../../page-objects/elements'
 
 describe('checkboxes tests', ()=> {
 
-    const checkboxes = new Checkboxes()
+    const elements = new Elements()
     let values;
+
+    const checkbox1 = '#checkboxes > :nth-child(1)'
+    const checkbox2 = '#checkboxes > :nth-child(3)'
 
     before(()=> {
         cy.fixture('expected').then((data) =>{
@@ -23,11 +26,11 @@ describe('checkboxes tests', ()=> {
     })
 
     it('should verify if checkbox can be ticked', ()=>{
-       checkboxes.checkbox1().check().should('be.checked')
+       elements.get_element(checkbox1).check().should('be.checked')
    })
 
    it('should verify if checkbox can be unticked', ()=>{
-    checkboxes.checkbox2().uncheck().should('not.be.checked')
+    elements.get_element(checkbox2).uncheck().should('not.be.checked')
 })
 
 after(()=>{
