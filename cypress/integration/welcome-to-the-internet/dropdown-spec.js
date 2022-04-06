@@ -2,35 +2,32 @@
 This class has tests to verify the Dropdown page. 
 */
 
-import Elements from '../../page-objects/elements'
+import Homepage from "../../page-objects/homepage";
+import DropDown from "../../page-objects/dropdown";
 
-describe('dropdown tests', ()=> {
+describe("dropdown tests", () => {
+  const homepage = new Homepage();
+  const dropdown = new DropDown();
+  let values;
 
-    const elements = new Elements()
-    let values;
+  before(() => {
+    cy.fixture("dropdown_expected").then((data) => {
+      values = data;
+    });
 
-    const h3 = 'h3'
-    const dropdownVal = 'select#dropdown'
+    cy.visitHerakuPage();
+  });
 
-    before(()=> {
-        cy.fixture('expected').then( (data) => {
-                values = data;
-            })
+  it("should verify if url contains string, dropdown", () => {
+    homepage.dropdown().click();
+    cy.url().should("include", values.dropdown);
+  });
 
-        cy.visitHerakuPage()
-    })
+  it("should verify if it can select items from the dropdown list", () => {
+    dropdown.dropdownbar().select("Option 1").should("have.value", "1");
+  });
 
-    it('should verify if url contains string, dropdown', ()=>{
-        cy.contains('Dropdown').click()
-        cy.url().should('include', values.dropdown)
-    })
-
-    it('should verify if it can select items from the dropdown list', ()=>{
-        elements.get_element(dropdownVal).select('Option 1').should('have.value', '1')
-   })
-
-after(()=>{
-    cy.clearCookies()
-})
-   
-})
+  after(() => {
+    cy.clearCookies();
+  });
+});

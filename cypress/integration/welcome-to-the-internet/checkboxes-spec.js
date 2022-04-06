@@ -2,39 +2,36 @@
 This class has tests to verify the Checkboxes page.  
 */
 
-import Elements from '../../page-objects/elements'
+import Checkboxes from "../../page-objects/checkboxes";
+import Homepage from "../../page-objects/homepage";
 
-describe('checkboxes tests', ()=> {
+describe("checkboxes tests", () => {
+  const checkbox = new Checkboxes();
+  const homepage = new Homepage();
+  let values;
 
-    const elements = new Elements()
-    let values;
+  before(() => {
+    cy.fixture("checkboxes_expected").then((data) => {
+      values = data;
+    });
 
-    const checkbox1 = '#checkboxes > :nth-child(1)'
-    const checkbox2 = '#checkboxes > :nth-child(3)'
+    cy.visitHerakuPage();
+  });
 
-    before(()=> {
-        cy.fixture('expected').then((data) =>{
-            values = data;
-        })
+  it("should verify if url contains string, checkboxes", () => {
+    homepage.checkboxes_title().click();
+    cy.url().should("include", values.checkboxes);
+  });
 
-        cy.visitHerakuPage()
-    })
+  it("should verify if checkbox can be ticked", () => {
+    checkbox.get_checkbox1().check().should("be.checked");
+  });
 
-    it('should verify if url contains string, checkboxes', ()=>{
-        cy.contains('Checkboxes').click()
-        cy.url().should('include', values.checkboxes)
-    })
+  it("should verify if checkbox can be unticked", () => {
+    checkbox.get_checkbox2().uncheck().should("not.be.checked");
+  });
 
-    it('should verify if checkbox can be ticked', ()=>{
-       elements.get_element(checkbox1).check().should('be.checked')
-   })
-
-   it('should verify if checkbox can be unticked', ()=>{
-    elements.get_element(checkbox2).uncheck().should('not.be.checked')
-})
-
-after(()=>{
-    cy.clearCookies()
-})
-   
-})
+  after(() => {
+    cy.clearCookies();
+  });
+});

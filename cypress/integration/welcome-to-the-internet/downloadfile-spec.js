@@ -14,15 +14,35 @@ module.exports = (on, config) => {
 
 */
 
-describe('File download tests', () =>{
+import Homepage from "../../page-objects/homepage";
 
-    const expectedText = 'pardirnatural'
-    const downloadURL = 'https://the-internet.herokuapp.com/download/some-file.txt'
-    const location = 'cypress/fixtures/Download'
-    const filename = 'downloaded.txt'
+describe("File download tests", () => {
+  const homepage = new Homepage();
 
-    it('should verify if file is downloaded to cypress.fixtures folder', () => {
-        cy.downloadFile(downloadURL,location, filename)
-        cy.readFile(`${location}/${filename}`).should('contain', expectedText)    
-    })
-})
+  const downloadURL =
+    "https://the-internet.herokuapp.com/download/some-file.txt";
+  const location = "cypress/fixtures/Download";
+  const filename = "downloaded.txt";
+
+  let values;
+
+  before(() => {
+    cy.fixture("downloadFile_expected").then((data) => {
+      values = data;
+    });
+    cy.visitHerakuPage();
+  });
+
+  it("should verify url contains string, download", () => {
+    homepage.fileDownload().click();
+    cy.url().should("include", values.urlValue);
+  });
+
+  it("should verify if file is downloaded to cypress.fixtures folder", () => {
+    cy.downloadFile(downloadURL, location, filename);
+    cy.readFile(`${location}/${filename}`).should(
+      "contain",
+      values.expectedText
+    );
+  });
+});
